@@ -1,17 +1,17 @@
 ﻿using LearnLink.Model;
 
-using (UchebContext db = new UchebContext())
-{
-    University u1 = new University { UnivName = "МГУ", Rating = 606, City = "Москва" };
-    University u2 = new University { UnivName = "BГУ", Rating = 296, City = "Москва" };
-    University u3 = new University { UnivName = "НГУ", Rating = 345, City = "Новосибирск" };
-    University u4 = new University { UnivName = "РГУ", Rating = 416, City = "Ростов" };
-    University u5 = new University { UnivName = "БГУ", Rating = 345, City = "Белгород" };
-    University u6 = new University { UnivName = "ТГУ", Rating = 368, City = "Томск" };
-    University u7 = new University { UnivName = "ВГМА", Rating = 327, City = "Воронеж" };
-    db.Universities.AddRange(u1, u2,u3,u4,u5,u6,u7);
-    await db.SaveChangesAsync();
-}
+//using (UchebContext db = new UchebContext())
+//{
+//    University u1 = new University { UnivName = "МГУ", Rating = 606, City = "Москва" };
+//    University u2 = new University { UnivName = "BГУ", Rating = 296, City = "Москва" };
+//    University u3 = new University { UnivName = "НГУ", Rating = 345, City = "Новосибирск" };
+//    University u4 = new University { UnivName = "РГУ", Rating = 416, City = "Ростов" };
+//    University u5 = new University { UnivName = "БГУ", Rating = 345, City = "Белгород" };
+//    University u6 = new University { UnivName = "ТГУ", Rating = 368, City = "Томск" };
+//    University u7 = new University { UnivName = "ВГМА", Rating = 327, City = "Воронеж" };
+//    db.Universities.AddRange(u1, u2,u3,u4,u5,u6,u7);
+//    await db.SaveChangesAsync();
+//}
 
 //using (UchebContext db = new UchebContext())
 //{
@@ -125,7 +125,7 @@ using (UchebContext db = new UchebContext())
         UnivId = 1
 
     };
-    db.Students.AddRange(st1, st2);
+    db.Students.AddRange(st1, st2,st3,st4,st5,st6,st7,st8,st9,st10);
     await db.SaveChangesAsync();
 }
 
