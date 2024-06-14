@@ -1,4 +1,5 @@
 ﻿using LearnLink.Model;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 //using (UchebContext db = new UchebContext())
 //{
@@ -175,11 +176,44 @@
 //    }
 //}
 
+//using (UchebContext db = new UchebContext())
+//{
+//    var list = db.ExamMarks.Select(p=>p.Mark).Distinct().ToList();
+//    foreach (var i in list)
+//    {
+//        Console.WriteLine(i.Value);
+//    }
+//}
+
+//using (UchebContext db = new UchebContext())
+//{
+//    var list = db.Students.Where(u => u.Kurs>=3).Select(p => new { Name = p.Surname }).ToList();
+//    foreach (var i in list)
+//    {
+//        Console.WriteLine(i.Name);
+//    }
+
+//    var query = from s in db.Students
+//                where s.Kurs >= 3
+//                select new
+//                {
+//                    Name=s.Surname
+//                };
+//    foreach (var i in query.ToList())
+//    {
+//        Console.WriteLine(i.Name);
+//    }
+//}
+
 using (UchebContext db = new UchebContext())
 {
-    var list = db.ExamMarks.Select(p=>p.Mark).Distinct().ToList();
-    foreach (var i in list)
+    DateTime t1 = DateTime.Parse("10.01.1999");
+    DateTime t2 = DateTime.Parse("20.01.1999");
+    var list = db.ExamMarks.Where(u => DateTime.Parse(u.ExamDate) >=t1 &&
+    DateTime.Parse(u.ExamDate)<=t2).Select(p => new { Name = p.SubjId }).ToList();
+    foreach (var i in list.ToList())
     {
-        Console.WriteLine(i.Value);
+        Console.WriteLine(i.Name);
     }
 }
+
