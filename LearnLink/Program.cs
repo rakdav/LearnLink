@@ -123,6 +123,7 @@ using (UchebContext db = new UchebContext())
         City = "Воронеж",
         BirthDay = new DateTime(1980, 1, 7).ToShortDateString(),
         UnivId = 1
+
     };
     db.Students.AddRange(st1, st2);
     await db.SaveChangesAsync();
