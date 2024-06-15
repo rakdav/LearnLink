@@ -205,15 +205,135 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 //    }
 //}
 
+//using (UchebContext db = new UchebContext())
+//{
+//    DateTime t1 = DateTime.Parse("10.01.1999");
+//    DateTime t2 = DateTime.Parse("20.01.1999");
+//    var list = db.ExamMarks.Select(p => new { Name = p.SubjId, Date=p.ExamDate }).ToList();
+//    foreach (var i in list.ToList())
+//    {
+//        if(DateTime.Parse(i.Date)>=t1&&DateTime.Parse(i.Date)<=t2) Console.WriteLine(i.Name);
+//    }
+//}
+
+//using (UchebContext db = new UchebContext())
+//{
+//    var list = db.ExamMarks.Where(p => p.StudentId == 5 || p.StudentId == 10).ToList();
+//    foreach (var i in list){
+//        Console.WriteLine(i.ExamDate+" "+i.Mark+" "+db.Students.FirstOrDefault(u=>u.StudentId==i.StudentId)!.Surname);
+//    } 
+//}
+
+//using (UchebContext db = new UchebContext())
+//{
+//    var list = db.Subjects.Where(p => p.SubjName.StartsWith("И")).ToList();
+//    foreach (var i in list)
+//    {
+//        Console.WriteLine(i.SubjName);
+//    }
+//}
+
+//9.Н а п ишитез а п рос д ляп од сч ета колич еств а студ ентов , сд ав а вших экз амен
+//п о п ред мету обуч енияс ид ентифика тором, рав ным20.
+//using (UchebContext db = new UchebContext())
+//{
+//    int count = db.ExamMarks.Count(p=>p.StudentId==5);
+//    Console.WriteLine(count);
+//}
+
+//а п ишитез а п рос, который п оз в оляет п од сч итатьв та блицеEXAM_MARKS
+//колич еств о раз лич ных п ред метов обуч ения
+
+//using (UchebContext db = new UchebContext())
+//{
+//    int count = db.ExamMarks.Select(p=>p.SubjId).Distinct().Count();
+//    Console.WriteLine(count);
+//}
+
+//using (UchebContext db = new UchebContext())
+//{
+//    var students = db.ExamMarks.GroupBy(p => p.StudentId).Select(g => new
+//    {
+//        Id = g.Key,
+//        min=db.ExamMarks.Where(p=>p.StudentId==g.Key).Select(p=>p.Mark).Min()
+//    });
+//    foreach(var i in students)
+//    {
+//        Console.WriteLine(i.Id+" "+i.min);
+//    }
+//}
+//Н а п ишитез а п рос, в ып олняющ ий в ыв од фамилии п ерв ого в а лфа в итном
+//п оряд ке (п о фамилии) студ ента, фамилия которого нач ина ется на букв у
+//“И”.
+
+//using (UchebContext db = new UchebContext())
+//{
+//    Student student = db.Students.Where(p => p.Name.StartsWith("И")).First();
+//    Console.WriteLine(student.Name+" "+student.Surname);
+//}
+
+//Н а п ишите з ап рос, который в ып олняет в ыв од д ля кажд ого п ред мета
+//обуч ения на именов а ние п ред мета и максима льное з нач ение номера
+//семестр а, в которомэ тотп р ед мет п реп од а ется.
+//using (UchebContext db = new UchebContext())
+//{
+//    var list = db.Subjects.GroupBy(p => p.SubjName).Select(g=>new {
+//        Name=g.Key,
+//        MaxSemestr=db.Subjects.Where(p=>p.SubjName==g.Key).Select(p=>p.Semester).Max()
+//    });
+//    foreach(var i in list)
+//    Console.WriteLine(i.Name + " " + i.MaxSemestr);
+//}
+
+//а п ишите з ап рос, который в ып олняет в ыв од д анных д ля кажд ого
+//конкретного д ня сд ач и экз амена о колич еств е студ ентов , сд а в а вших
+//э кз амен в э тот д ень.
+//using (UchebContext db = new UchebContext())
+//{
+//    var list = db.ExamMarks.GroupBy(p => p.ExamDate).Select(g => new
+//    {
+//        Name = g.Key,
+//        MaxSemestr = db.ExamMarks.Where(p => p.ExamDate == g.Key).Select(p => p.StudentId).Count()
+//    });
+//    foreach (var i in list)
+//        Console.WriteLine(i.Name + " " + i.MaxSemestr);
+//}
+
+//Запишите запрос для получения среднего балла для каждого курса по каждому предмету.
+//using (UchebContext db = new UchebContext())
+//{
+//    var avgBalls = db.ExamMarks.Join(db.Students,
+//                                   u => u.StudentId,
+//                                   p => p.StudentId,
+//                                   (u, p) => new 
+//                                   {
+//                                       Kurs=p.Kurs,
+//                                       Predmet=db.Subjects.FirstOrDefault(c=>c.SubjId==u.SubjId)!.SubjName,
+//                                       avg = db.ExamMarks.Where(c => c.SubjId == u.SubjId).Select(c => c.Mark).Average()
+//}
+//                                   ).Distinct();
+//    foreach(var i in avgBalls)
+//    {
+//        Console.WriteLine(i.Kurs+" "+i.Predmet+" "+i.avg);
+
+//    }
+//}
+//Пред п оложим, ч то стип енд ия в сем студ ентам ув елич ена на 20%.
+//Н а п ишите з ап рос к таблице STUDENT, в ып олняющ ий в ыв од номера
+//студ ента, фамилию студ ента и в елич ину ув елич енной стип енд ии.
+//Выход ные д анные уп оряд оч ить: а) п о з нач ению п ослед него столбца
+//(в елич инестип енд ии); б) в а лфав итномп оряд кефамилий студ ентов .
+
 using (UchebContext db = new UchebContext())
 {
-    DateTime t1 = DateTime.Parse("10.01.1999");
-    DateTime t2 = DateTime.Parse("20.01.1999");
-    var list = db.ExamMarks.Where(u => DateTime.Parse(u.ExamDate) >=t1 &&
-    DateTime.Parse(u.ExamDate)<=t2).Select(p => new { Name = p.SubjId }).ToList();
-    foreach (var i in list.ToList())
+    var list = db.Students.Select(p => new
     {
-        Console.WriteLine(i.Name);
+        Number = p.StudentId,
+        FIO = p.Name + " " + p.Surname,
+        Stip = p.Stipend + 0.2 * p.Stipend
+    }).OrderBy(p => p.FIO);
+    foreach(var i in list)
+    {
+        Console.WriteLine(i.Number+" "+i.FIO+" "+i.Stip);
     }
 }
-
